@@ -1,5 +1,6 @@
-from sqlalchemy import MetaData, Column, text, String, Boolean, Table, Integer, Float, ForeignKey
+from sqlalchemy import MetaData, Column, String, Boolean, Table, Integer, Float, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
+import uuid
 
 metadata = MetaData()
 
@@ -7,7 +8,7 @@ metadata = MetaData()
 users = Table(
     "users",
     metadata,
-    Column("id", UUID(as_uuid=True), primary_key=True,  server_default=text("uuid_generate_v4()"), unique=True),
+    Column("id", UUID(as_uuid=True), primary_key=True,  default=uuid.uuid4, unique=True),
     Column("text", String, nullable=False),
     Column("completed", Boolean)
 )
@@ -16,7 +17,7 @@ users = Table(
 foods = Table(
     "foods",
     metadata,
-    Column("id", UUID(as_uuid=True), primary_key=True,  server_default=text("uuid_generate_v4()"), unique=True),
+    Column("id", UUID(as_uuid=True), primary_key=True,  default=uuid.uuid4, unique=True),
     Column("name", String, nullable=False, unique=True),
     Column("description", String, nullable=False),
     Column("image", String, nullable=False),
@@ -28,7 +29,7 @@ foods = Table(
 orders = Table(
     "orders",
     metadata,
-    Column("id", UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"), unique=True),
+    Column("id", UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True),
     Column("name", String, nullable=False, unique=True),
     Column("description", String, nullable=False),
     Column("total", Float, nullable=False),
@@ -39,7 +40,7 @@ orders = Table(
 order_details = Table(
     "order_details",
     metadata,
-    Column("id", UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"), unique=True),
+    Column("id", UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True),
     Column('food_id', UUID(as_uuid=True), ForeignKey("foods.id"), nullable=False),
     Column('order_id', UUID(as_uuid=True), ForeignKey("orders.id"), nullable=False)
 )
@@ -48,7 +49,7 @@ order_details = Table(
 user_action_logs = Table(
     "user_action_logs",
     metadata,
-    Column("id", UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"), unique=True),
+    Column("id", UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True),
     Column('food_id', UUID(as_uuid=True), ForeignKey("foods.id"), nullable=False),
     Column('order_id', UUID(as_uuid=True), ForeignKey("orders.id"), nullable=False)
 )

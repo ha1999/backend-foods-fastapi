@@ -1,21 +1,37 @@
-ersion: '3'
+version: "3.3"
 
 services:
-  app:
-    build: .
-    restart: on-failure
-    ports:
-      - "8000:8000"
+#  mysql:
+#    container_name: mysql-container-food
+#    image: mysql
+#    command: --default-authentication-plugin=mysql_native_password
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: 12345678
+#    ports:
+#      - "3309:3306"
+#    volumes:
+#      - ./mysql-data:/var/lib/mysql
+
+  mongodb:
+    container_name: mongodb-container-food
+    image: mongo
+    restart: always
     environment:
-      DATABASE_URL: "postgresql://postgres:postgres@db/postgres"
-    env_file:
-      - .env
-    depends_on:
-      - db
-  db:
-    image: postgres:11.5-alpine
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 12345678
     ports:
-      - "5432:5432"
-    env_file:
-      - .env
+      - "27017:27017"
     volumes:
+      - ./mongo-data:/data/db
+
+  postgresql:
+    container_name: postgresql-container-food
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
