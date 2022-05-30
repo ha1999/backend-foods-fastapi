@@ -1,9 +1,12 @@
 from fastapi import FastAPI
 from src.auth.router_auth import router_auth
 from src.postgresql.init_db import database, create_all_table
-
+from src.middlewares.catch_exceptions import catch_exceptions_middleware
+from src.middlewares.check_header_request import catch_header_middleware
 
 app = FastAPI()
+app.middleware('http')(catch_header_middleware)
+app.middleware('http')(catch_exceptions_middleware)
 
 
 @app.on_event("startup")

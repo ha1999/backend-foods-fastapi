@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     POSTGRES_USER: str = "dlotllaz"
     POSTGRES_PASSWORD: str = "ZX1EQ_jItyM_KKK8pBaNvfV7k9ZaYxuJ"
     POSTGRES_DB: str = "dlotllaz"
+    SQLALCHEMY_DATABASE_URI_DEV: Optional[PostgresDsn] = "postgresql://postgres:12345678@localhost:5433/dlotllaz"
     SQLALCHEMY_DATABASE_URI: Optional[
         PostgresDsn] = "postgresql://dlotllaz:ZX1EQ_jItyM_KKK8pBaNvfV7k9ZaYxuJ@fanny.db.elephantsql.com/dlotllaz"
 
@@ -40,7 +41,8 @@ class Settings(BaseSettings):
     class Config:
         case_sensitive: True
 
-    MOTOR_DATABASE_URI: str = "mongodb+srv://ubuntu:255zC8r4ym8Z3qOR@cluster0.lnefx.mongodb.net/?retryWrites=true&w=majority"
+    MOTOR_DATABASE_URI_PRO: str = "mongodb+srv://ubuntu:255zC8r4ym8Z3qOR@cluster0.lnefx.mongodb.net/?retryWrites=true&w=majority"
+    MOTOR_DATABASE_URI_DEV: str = "mongodb+srv://root:12345678@localhost/?retryWrites=true&w=majority"
 
 
 settings = Settings()
