@@ -18,4 +18,5 @@ coverage.xml
 tests
 scripts
 postman
-./postgres-data
+./pg-data
+./mongo-data

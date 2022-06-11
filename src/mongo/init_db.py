@@ -2,7 +2,7 @@ import motor.motor_asyncio
 
 from src.config.settings import settings
 
-client = motor.motor_asyncio.AsyncIOMotorClient(settings.MOTOR_DATABASE_URI)
+client = motor.motor_asyncio.AsyncIOMotorClient(settings.MOTOR_DATABASE_URI_DEV)
 db = client.food_fastapi
 
 
